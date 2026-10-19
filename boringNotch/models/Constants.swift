@@ -391,6 +391,7 @@ extension Defaults.Keys {
     static let updateChannel = Key<UpdateChannel>("updateChannel", default: UpdateChannel.bundled)
 
     // MARK: Behavior
+    static let photoBrowserPreview = Key<Bool>("photoBrowserPreview", default: false)
     static let minimumHoverDuration = Key<TimeInterval>("minimumHoverDuration", default: 0.3)
     static let enableOpeningAnimation = Key<Bool>("enableOpeningAnimation", default: true)
     static let animationSpeedMultiplier = Key<Double>("animationSpeedMultiplier", default: 1.0)

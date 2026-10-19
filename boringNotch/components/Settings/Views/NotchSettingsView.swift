@@ -26,6 +26,7 @@ struct NotchSettingsView: View {
         Form {
             sizingSection
             behaviorSection
+            photoPreviewSection
             gesturesSection
             windowSection
         }
@@ -178,6 +179,20 @@ struct NotchSettingsView: View {
             Text("Behavior")
         } footer: {
             Text("Shows a smaller opened notch with just the music player — no tabs, calendar or mirror.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    private var photoPreviewSection: some View {
+        Section {
+            Defaults.Toggle(key: .photoBrowserPreview) {
+                Text("Photo browser preview")
+            }
+        } header: {
+            Text("Photos")
+        } footer: {
+            Text("Adds a Photos tab with sample albums in the expanded notch. Does not access or change your photo library. Turn off Compact mode to use it.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
