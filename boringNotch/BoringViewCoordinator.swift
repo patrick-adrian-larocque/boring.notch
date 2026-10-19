@@ -91,6 +91,7 @@ final class BoringViewCoordinator: ObservableObject {
     private var accessibilityObserver: Any?
     private var osdReplacementCancellable: AnyCancellable?
     private var boringShelfCancellable: AnyCancellable?
+    private var photoPreviewCancellable: AnyCancellable?
     private var osdSourceCancellables: [AnyCancellable] = []
     private var notificationLiveActivityCancellable: AnyCancellable?
     private var uiEventCancellable: AnyCancellable?
@@ -188,6 +189,16 @@ final class BoringViewCoordinator: ObservableObject {
                 Task { @MainActor in
                     guard let self = self else { return }
                     if !change.newValue && self.currentView == .shelf {
+                        self.currentView = .home
+                    }
+                }
+            }
+
+        photoPreviewCancellable = Defaults.publisher(.photoBrowserPreview)
+            .sink { [weak self] change in
+                Task { @MainActor in
+                    guard let self else { return }
+                    if !change.newValue && self.currentView == .photos {
                         self.currentView = .home
                     }
                 }

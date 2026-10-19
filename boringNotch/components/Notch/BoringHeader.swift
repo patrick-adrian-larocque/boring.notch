@@ -9,6 +9,7 @@ import Defaults
 import SwiftUI
 
 struct BoringHeader: View {
+    @Default(.photoBrowserPreview) private var photoBrowserPreview
     @EnvironmentObject var vm: BoringViewModel
     @ObservedObject var batteryModel = BatteryStatusViewModel.shared
     @ObservedObject var coordinator = BoringViewCoordinator.shared
@@ -16,7 +17,7 @@ struct BoringHeader: View {
     var body: some View {
         HStack(spacing: 0) {
             HStack {
-                if (!shelfState.isEmpty || coordinator.alwaysShowTabs) && Defaults[.boringShelf] {
+                if photoBrowserPreview || ((!shelfState.isEmpty || coordinator.alwaysShowTabs) && Defaults[.boringShelf]) {
                     TabSelectionView()
                 } else if vm.notchState == .open {
                     EmptyView()
